@@ -1,13 +1,45 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>webapp</title>
-  </head>
-  <body>
-    <div id="app"></div>
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хотелски Обяви - Начало</title>
+    <!-- Сигурна връзка към Bootstrap стиловете -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Навигационна лента (Navbar) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">🏨 Хотелски Обяви</a>
+            <div class="d-flex" id="authButtons">
+                <a href="login.html" class="btn btn-outline-light me-2 btn-sm">Вход</a>
+                <a href="register.html" class="btn btn-light btn-sm fw-bold">Регистрация</a>
+            </div>
+        </div>
+    </nav>
+
+        <!-- Основно съдържание (Hero секция) -->
+    <div class="container my-5">
+        <div class="p-5 mb-4 bg-white rounded-3 shadow-sm border-0">
+            <div class="container-fluid py-3 text-center">
+                <h1 class="display-5 fw-bold text-dark">Резервирайте следващата си почивка</h1>
+                <p class="col-md-8 mx-auto fs-5 text-muted">Открийте най-уютните хотели и апартаменти на най-добрите цени за нощувка. Изберете вашите дни и резервирайте лесно.</p>
+                <a href="#listingsContainer" class="btn btn-primary btn-lg px-4 fw-bold shadow-sm">Разгледай стаите</a>
+            </div>
+        </div>
+
+
+        <!-- Последни обяви -->
+        <h3 class="fw-bold mb-4 text-secondary">Последни обяви</h3>
+        <div class="row" id="listingsContainer">
+            <div class="col text-center py-5">
+                <p class="text-muted">Все още няма добавени обяви в базата данни.</p>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="/src/main.js"></script>
-  </body>
+</body>
 </html>
