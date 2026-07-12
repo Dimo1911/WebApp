@@ -3,40 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Хотелски Обяви - Начало</title>
-    <!-- Сигурна връзка към Bootstrap стиловете -->
+    <title>Хотелски Обяви - Намерете своя престой</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Модерен Hero компонент с голяма фонова снимка на курорт */
+            .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://images.pexels.com/photos/1838554/pexels-photo-1838554.jpeg?auto=compress&cs=tinyrgb&w=1600');
+            background-size: cover;
+            background-position: center;
+            min-height: 450px;
+        }
+
+        /* Плуващата бяла карта за избор на престой (като в Hotels.com) */
+        .search-card {
+            border: none;
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        .hotel-card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.2s;
+        }
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
 <body class="bg-light">
 
     <!-- Навигационна лента (Navbar) -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">🏨 Хотелски Обяви</a>
+            <a class="navbar-brand fw-bold text-primary fs-4" href="index.html">🏨 Хотелски Обяви</a>
             <div class="d-flex" id="authButtons">
-                <a href="login.html" class="btn btn-outline-light me-2 btn-sm">Вход</a>
-                <a href="register.html" class="btn btn-light btn-sm fw-bold">Регистрация</a>
+                <a href="login.html" class="btn btn-outline-primary me-2 px-3 fw-bold rounded-pill">Вход</a>
+                <a href="register.html" class="btn btn-primary px-3 fw-bold rounded-pill shadow-sm">Регистрация</a>
             </div>
         </div>
     </nav>
 
-        <!-- Основно съдържание (Hero секция) -->
-    <div class="container my-5">
-        <div class="p-5 mb-4 bg-white rounded-3 shadow-sm border-0">
-            <div class="container-fluid py-3 text-center">
-                <h1 class="display-5 fw-bold text-dark">Резервирайте следващата си почивка</h1>
-                <p class="col-md-8 mx-auto fs-5 text-muted">Открийте най-уютните хотели и апартаменти на най-добрите цени за нощувка. Изберете вашите дни и резервирайте лесно.</p>
-                <a href="#listingsContainer" class="btn btn-primary btn-lg px-4 fw-bold shadow-sm">Разгледай стаите</a>
+    <!-- Голяма Модерна Hero Секция (Фон със снимка) -->
+    <div class="hero-section d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 text-white mb-4 mb-lg-0 text-center text-lg-start pt-4">
+                    <h1 class="display-4 fw-extrabold mb-3">Резервирайте следващата си почивка</h1>
+                    <p class="fs-5 opacity-90">Открийте луксозни хотели, уютни апартаменти и вили на най-добрите цени за нощувка.</p>
+                </div>
+                <!-- Плуващата Търсачка / Резервационен панел -->
+                <div class="col-lg-5">
+                    <div class="card search-card shadow-lg p-3 bg-white text-dark">
+                        <div class="card-body">
+                            <h4 class="fw-bold mb-3 text-center text-lg-start">Къде искате да отседнете?</h4>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label small fw-bold text-muted">Дестинация / Хотел</label>
+                                    <input type="text" class="form-control form-control-lg rounded-3" placeholder="Напр. Банско, Созопол...">
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label class="form-label small fw-bold text-muted">Настаняване</label>
+                                        <input type="date" class="form-control rounded-3">
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label small fw-bold text-muted">Напускане</label>
+                                        <input type="date" class="form-control rounded-3">
+                                    </div>
+                                </div>
+                                <a href="#listingsContainer" class="btn btn-primary btn-lg w-100 fw-bold rounded-3 shadow-sm mt-2">Търси стаи</a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-
-        <!-- Последни обяви -->
-        <h3 class="fw-bold mb-4 text-secondary">Последни обяви</h3>
-        <div class="row" id="listingsContainer">
-            <div class="col text-center py-5">
-                <p class="text-muted">Все още няма добавени обяви в базата данни.</p>
+    <!-- Контейнер за обявите -->
+    <div class="container my-5" id="listingsContainer">
+        <h3 class="fw-bold mb-4 text-dark">Препоръчани дестинации и престои</h3>
+        
+        <!-- Примерна визуална мрежа от карти, която ще пълним от Supabase -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card hotel-card shadow-sm h-100">
+                    <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinyrgb&w=600" class="card-img-top rounded-top-3" alt="Hotel">
+                    <div class="card-body p-4">
+                        <h5 class="card-title fw-bold">Гранд Хотел Спа</h5>
+                        <p class="card-text text-muted small">Уютен спа хотел с басейн и красива гледка към планината.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="fw-bold text-primary fs-5">€ 120 <span class="fs-6 text-muted fw-normal">/ нощ</span></span>
+                            <a href="details.html" class="btn btn-sm btn-outline-primary px-3 rounded-pill fw-bold">Преглед</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <!-- Тук автоматично ще се появяват следващите карти -->
         </div>
     </div>
 
