@@ -5,11 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Админ Панел - Хотелски Обяви</title>
 </head>
-<body class="bg-dark text-white p-5">
-    <div class="container">
-        <h1>Административен панел</h1>
-        <p>Добре дошли в контролния панел за управление на хотелските обяви.</p>
-        <a href="index.html" class="btn btn-outline-light">Към началната страница</a>
+<body class="bg-light p-4">
+    <div class="container bg-white p-5 rounded shadow-sm" style="max-width: 800px;">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold text-dark">Административен панел</h1>
+            <a href="index.html" class="btn btn-outline-secondary rounded-pill">Към началото</a>
+        </div>
+        
+        <p class="text-muted">Създайте нова обява за хотел или стая под наем.</p>
+
+        <form id="add-hotel-form" class="mt-4">
+            <div class="mb-3">
+                <label for="hotel-title" class="form-label fw-bold">Име на хотела / обявата</label>
+                <input type="text" class="form-control" id="hotel-title" required placeholder="напр. Хотел Слънчев Бряг">
+            </div>
+
+            <div class="mb-3">
+                <label for="hotel-price" class="form-label fw-bold">Цена за нощувка (BGN)</label>
+                <input type="number" class="form-control" id="hotel-price" required placeholder="напр. 120">
+            </div>
+
+            <div class="mb-3">
+                <label for="hotel-description" class="form-label fw-bold">Описание</label>
+                <textarea class="form-control" id="hotel-description" rows="4" required placeholder="Опишете удобствата, стаите и локацията..."></textarea>
+            </div>
+
+            <div class="mb-4">
+                <label for="hotel-image" class="form-label fw-bold">Снимка на обявата</label>
+                <input class="form-control" type="file" id="hotel-image" accept="image/*" required>
+                <div class="form-text">Снимката ще бъде качена в Supabase Storage.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold rounded-pill">Публикувай обявата</button>
+        </form>
     </div>
+
+    <script type="module" src="/src/admin.js"></script>
 </body>
 </html>
