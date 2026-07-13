@@ -1,5 +1,6 @@
 import { supabase } from './supabase.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 // Автоматична защита: Проверка дали потребителят е логнат веднага при зареждане на страницата
 async function checkAuth() {
     const { data: { user }, error } = await supabase.auth.getUser();
@@ -44,18 +45,32 @@ if (form) {
             const fileName = `${Date.now()}.${fileExt}`; // Уникално име на файла
             const filePath = `public/${fileName}`;
 
+            // Пробваме първо с малки букви, които са стандарт за Supabase URL адресите
             const { data: storageData, error: storageError } = await supabase
                 .storage
-                .from('HOTEL-IMAGES')
+                .from('hotel-images')
                 .upload(filePath, imageFile);
 
-            if (storageError) throw storageError;
+            if (storageError) {
+                console.warn('Опит с малки букви не успея, пробваме с главни...');
+                // Алтернативен опит с главни букви, ако първият се провали
+                const { data: retryData, error: retryError } = await supabase
+                    .storage
+                    .from('HOTEL-IMAGES')
+                    .upload(filePath, imageFile);
+                
+                if (retryError) throw retryError;
+            }
 
-            // 4. Взимане на публичния URL адрес на качената снимка
-            const { data: { publicUrl } } = supabase
-                .storage
-                .from('HOTEL-IMAGES')
-                .getPublicUrl(filePath);
+            // 4. Взимане на публичния URL адрес на качената снимка (пробваме и двата варианта)
+            let publicUrlResult;
+            try {
+                const { data } = supabase.storage.from('hotel-images').getPublicUrl(filePath);
+                publicUrlResult = data.publicUrl;
+            } catch {
+                const { data } = supabase.storage.from('HOTEL-IMAGES').getPublicUrl(filePath);
+                publicUrlResult = data.publicUrl;
+            }
 
             // 5. Записване на данните в таблицата 'hotels'
             const { data, error: insertError } = await supabase
@@ -65,7 +80,7 @@ if (form) {
                         title: title,
                         description: description,
                         price_per_night: parseFloat(price),
-                        image_url: publicUrl,
+                        image_url: publicUrlResult,
                         user_id: user.id
                     }
                 ]);
