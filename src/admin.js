@@ -1,4 +1,15 @@
 import { supabase } from './supabase.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Автоматична защита: Проверка дали потребителят е логнат веднага при зареждане на страницата
+async function checkAuth() {
+    const { data: { user }, error } = await supabase.auth.getUser();
+    
+    if (error || !user) {
+        // Ако няма логнат потребител, пренасочваме директно към Вход
+        window.location.href = 'login.html';
+    }
+}
+checkAuth();
 
 const form = document.getElementById('add-hotel-form');
 
