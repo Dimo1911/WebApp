@@ -46,7 +46,7 @@ if (form) {
 
             const { data: storageData, error: storageError } = await supabase
                 .storage
-                .from('hotel-images')
+                .from('HOTEL-IMAGES')
                 .upload(filePath, imageFile);
 
             if (storageError) throw storageError;
@@ -54,7 +54,7 @@ if (form) {
             // 4. Взимане на публичния URL адрес на качената снимка
             const { data: { publicUrl } } = supabase
                 .storage
-                .from('hotel-images')
+                .from('HOTEL-IMAGES')
                 .getPublicUrl(filePath);
 
             // 5. Записване на данните в таблицата 'hotels'
